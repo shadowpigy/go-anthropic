@@ -76,6 +76,42 @@ func (m MessagesRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(aux)
 }
 
+func (m *MessagesRequest) SetMaxTokens(maxTokens int) {
+	m.MaxTokens = maxTokens
+}
+
+func (m *MessagesRequest) SetToolChoice(v any) {
+	tc, ok := v.(*ToolChoice)
+	if !ok {
+		return
+	}
+	m.ToolChoice = tc
+}
+
+func (m *MessagesRequest) AddTool(t any) {
+	tool, ok := t.(ToolDefinition)
+	if !ok {
+		return
+	}
+	m.Tools = append(m.Tools, tool)
+}
+
+func (m *MessagesRequest) SetModel(model string) {
+	m.Model = Model(model)
+}
+
+func (m *MessagesRequest) SetResponseFormat(f any) {
+	// do nothing
+}
+
+func (m *MessagesRequest) SetFrequencyPenalty(p float32) {
+	// do nothing
+}
+
+func (m *MessagesRequest) SetPresencePenalty(p float32) {
+	// do nothing
+}
+
 func (m *MessagesRequest) SetTemperature(t float32) {
 	m.Temperature = &t
 }
